@@ -24,17 +24,18 @@ namespace Tridion.Extensions.DynamicDelivery.Factories
     {
         public bool TryFindBinary(string url, out IBinary binary)
         {
-            string encodedUrl = HttpUtility.UrlPathEncode(url);
+            //string encodedUrl = HttpUtility.UrlPathEncode(url);
             binary = null;
             return false;
 
             Query findBinary = new Query(); 
             PublicationURLCriteria urlCriteria = new PublicationURLCriteria(url);
-            //MultimediaCriteria isBinary = new MultimediaCriteria(true);
-
+			
+            MultimediaCriteria isBinary = new MultimediaCriteria(true);
+			Com.Tridion.Broker.Querying.Criteria.Criteria allCriteria = Com.Tridion.Broker.Querying.CriteriaFactory.And(isBinary, isBinary);
             //Criteria allCriteria = CriteriaFactory.And(isBinary, urlCriteria);
-            Criteria allCriteria = urlCriteria;
-            findBinary.Criteria = allCriteria;
+            //Criteria allCriteria = urlCriteria;
+            //findBinary.Criteria = allCriteria;
 
             string[] binaryUri = findBinary.ExecuteQuery();
 
@@ -138,7 +139,7 @@ namespace Tridion.Extensions.DynamicDelivery.Factories
 
         public bool TryFindBinaryContent(string url, out byte[] bytes)
         {
-            string encodedUrl = HttpUtility.UrlPathEncode(url);
+            //string encodedUrl = HttpUtility.UrlPathEncode(url);
             bytes = null;
             return false;
             /*

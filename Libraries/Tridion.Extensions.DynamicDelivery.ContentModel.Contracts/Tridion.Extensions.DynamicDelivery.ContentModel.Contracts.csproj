@@ -85,6 +85,7 @@
     <Compile Include="Exceptions\ModelNotCreatedException.cs" />
     <Compile Include="Exceptions\PageNotFoundException.cs" />
     <Compile Include="ExtendedQueryParameters.cs" />
+    <Compile Include="CacheService\ICacheService.cs" />
     <Compile Include="Factories\ITaxonomyFactory.cs" />
     <Compile Include="Factories\IModelFactory.cs" />
     <Compile Include="Factories\IBinaryFactory.cs" />
@@ -115,6 +116,7 @@
   <ItemGroup>
     <None Include="ContentModelContractsClassDiagram.cd" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

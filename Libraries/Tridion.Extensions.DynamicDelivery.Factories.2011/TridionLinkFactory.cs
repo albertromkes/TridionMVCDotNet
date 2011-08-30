@@ -9,7 +9,6 @@ namespace Tridion.Extensions.DynamicDelivery.Factories
     using System.Text;
     using System.ComponentModel.Composition;
     using Tridion.ContentDelivery.Web.Linking;
-    using System.Web.Caching;
     using System.Web;
 
     [Export(typeof(ILinkFactory))]
@@ -35,11 +34,11 @@ namespace Tridion.Extensions.DynamicDelivery.Factories
             
             if (!uri.Equals(emptyTcmUri))
             {
-                Cache cache = HttpContext.Current.Cache;
+                //Cache cache = HttpContext.Current.Cache;
                 string cacheKey = String.Format(CACHEKEY_FORMAT, componentUri);
-                if (cache[cacheKey] != null)
+                if (CacheService.ContainsKey(cacheKey))
                 {
-                    return (String)cache[cacheKey];
+                    return (String)CacheService.GetItem(cacheKey);
                 }
                 else
                 {
@@ -48,7 +47,8 @@ namespace Tridion.Extensions.DynamicDelivery.Factories
                     {
                         return null;
                     }
-                    cache.Insert(cacheKey, link.Url, null, DateTime.Now.AddSeconds(30), TimeSpan.Zero); //TODO should this be configurable?
+                    //cache.Insert(cacheKey, link.Url, null, DateTime.Now.AddSeconds(30), TimeSpan.Zero); //TODO should this be configurable?
+					CacheService.AddItem(cacheKey, link.Url, null, DateTime.Now.AddSeconds(30), TimeSpan.Zero); //TODO should this be configurable?
                     return link.Url;
                 }
             }
